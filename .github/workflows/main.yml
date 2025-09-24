@@ -1,7 +1,6 @@
 # .github/workflows/test-guerrerogame.yml
 name: Unity Tests - GuerreroGame System
 
-# Cuándo ejecutar los tests
 on:
   push:
     branches: [ master, feature/* ]
@@ -35,6 +34,12 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 30
     
+    # 🔐 AÑADIR PERMISOS ESPECÍFICOS AQUÍ
+    permissions:
+      contents: write
+      actions: read
+      checks: write
+      
     strategy:
       fail-fast: false
       matrix:
@@ -73,8 +78,9 @@ jobs:
           githubToken: ${{ secrets.GITHUB_TOKEN }}
           checkName: ${{ matrix.test-mode }} Test Results - GuerreroGame
           coverageOptions: 'generateAdditionalMetrics;generateHtmlReport;generateBadgeReport;assemblyFilters:+Assembly-CSharp'
-          testFilters: >
-            GuerreroGameTests
+          # ❌ ELIMINAR testFilters: GuerreroGameTests
+          # 🆕 REEMPLAZAR POR customParameters: -testFilter=GuerreroGameTests
+          customParameters: -testFilter=GuerreroGameTests
       
       - name: 📄 Upload Test Results
         uses: actions/upload-artifact@v4
