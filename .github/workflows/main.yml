@@ -32,20 +32,17 @@ jobs:
   run-unity-tests:
     name: Run GuerreroGame Tests
     runs-on: ubuntu-latest
-    timeout-minutes: 30
     
-    # 🔐 AÑADIR PERMISOS ESPECÍFICOS AQUÍ
     permissions:
       contents: write
       actions: read
       checks: write
+      packages: read
       
     strategy:
       fail-fast: false
       matrix:
-        test-mode:
-          - playmode
-          - editmode
+        test-mode: [playmode, editmode]
     
     steps:
       - name: 📥 Checkout Repository
