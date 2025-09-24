@@ -31,7 +31,7 @@ public class GuerreroGameTests
         var enemigo = new GuerreroGame.Enemigo { vida = 10, estaVivo = true };
 
         // Actuar
-        enemigo.vida = 0;
+        enemigo.vida = 10;
         if (enemigo.vida <= 0) enemigo.estaVivo = false;
 
         // Verificar
